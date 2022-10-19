@@ -1,6 +1,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
+import json
 
 def get_schools(year):
     """ TODO definition
@@ -45,81 +46,14 @@ def get_players(schools, position, year):
 
 def get_html_school(school):
 
-    if school == "Alabama":
-        return "alabama"
-    elif school == "Arkansas":
-        return "arkansas"
-    elif school == "Auburn":
-        return "auburn"
-    elif school == "Baylor":
-        return "baylor"
-    elif school == "BYU":
-        return "brigham-young"
-    elif school == "Cincinnati":
-        return "cincinnati"
-    elif school == "Clemson":
-        return "clemson"
-    elif school == "Fresno State":
-        return "fresno-state"
-    elif school == "Georgia":
-        return "georgia"
-    elif school == "Houston":
-        return "houston"
-    elif school == "Iowa":
-        return "iowa"
-    elif school == "Kentucky":
-        return "kentucky"
-    elif school == "LSU":
-        return "louisiana-state"
-    elif school == "Miami (FL)":
-        return "miami-fl"
-    elif school == "Michigan":
-        return "michigan"
-    elif school == "Michigan State":
-        return "michigan-state"
-    elif school == "Minnesota":
-        return "minnesota"
-    elif school == "Mississippi State":
-        return "mississippi-state"
-    elif school == "NC State":
-        return "north-carolina-state"
-    elif school == "Notre Dame":
-        return "notre-dame"
-    elif school == "Ohio State":
-        return "ohio-state"
-    elif school == "Oklahoma":
-        return "oklahoma"
-    elif school == "Oklahoma State":
-        return "oklahoma-state"
-    elif school == "Ole Miss":
-        return "mississippi"
-    elif school == "Oregon":
-        return "oregon"
-    elif school == "Penn State":
-        return "penn-state"
-    elif school == "Pitt":
-        return "pittsburgh"
-    elif school == "Purdue":
-        return "purdue"
-    elif school == "Tennessee":
-        return "tennessee"
-    elif school == "Texas":
-        return "texas"
-    elif school == "Texas A&M":
-        return "texas-am"
-    elif school == "UCF":
-        return "central-florida"
-    elif school == "USC":
-        return "southern-california"
-    elif school == "Utah":
-        return "utah"
-    elif school == "Wake Forest":
-        return "wake-forest"
-    elif school == "Wisconsin":
-        return "wisconsin"
+    f = open("./json/schools_2022.json")
+    schools_dict = json.load(f)
+
+    if not schools_dict[school]:
+        print(f"Unknown school ::{school}::")
+        return None
     
-    print(f"Unknown school ::{school}::")
-    return None
+    return schools_dict[school]
 
 def get_all_players(year):
     positions = [
@@ -170,7 +104,6 @@ def get_boxscore_url(school, month, day, year):
     
     print(f"link not found for the game school: ::{school}::")
     return None
-
 
 
 
