@@ -46,7 +46,7 @@ def get_players(schools, position, year):
 
 def get_html_school(school):
 
-    f = open("./json/schools_2022.json")
+    f = open("./data/2022/schools.json")
     schools_dict = json.load(f)
 
     if not schools_dict[school]:
@@ -105,16 +105,24 @@ def get_boxscore_url(school, month, day, year):
     print(f"link not found for the game school: ::{school}::")
     return None
 
+def weekly_db_creation(year, week):
+
+    schools = get_schools(year)
+
+    return None
+
 
 
 
 
  
 def main():
-    schools = get_schools("2022")
-    for school in schools:
-        link = get_boxscore_url(school, "9", "3", "2022")
-        print(link)
+    players = get_all_players("2022")
+
+    to_export = players["QB"]
+
+    print(to_export.to_string())
+    
 
 
 if __name__ == "__main__":
